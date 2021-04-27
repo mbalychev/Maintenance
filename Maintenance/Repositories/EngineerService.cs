@@ -37,7 +37,7 @@ namespace Maintenance.Repositories
             List<Engineer> engineers = db.Engineers.ToList();
             List<EngineerModel> model = new List<EngineerModel>();
             foreach (Engineer engineer in engineers)
-                model.Add(engineer as EngineerModel);
+                model.Add(new EngineerModel { Id = engineer.Id, BirthDay = engineer.BirthDay, Education = engineer.Education, FirstName = engineer.FirstName, LastName = engineer.LastName});
             return model;
         }
 

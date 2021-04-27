@@ -9,6 +9,5 @@ namespace Maintenance.Models.Employee
     public class EngineerListFilter
     {
         public List<EngineerModel> Engineers { get; set; }
-        public SelectList
     }
 }

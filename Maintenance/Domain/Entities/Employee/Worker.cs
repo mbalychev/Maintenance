@@ -8,6 +8,7 @@ namespace Maintenance.Entities
 {
     public class Worker
     {
+        [Key]
         public int Id { get; set; }
         [Required(ErrorMessage ="необходимо указать Имя")]
         [Display(Name = "Имя")]
