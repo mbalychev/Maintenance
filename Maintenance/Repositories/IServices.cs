@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Maintenance.Repositories
 {
     public interface IServices<T> : IDisposable where T : class
     {
-        void Create(T item);
-        T Read(int id);
-        List<T> ReadAll();
-        void Update(T item);
-        void Delete (int id);
+        Task CreateAsync(T item);
+        Task<T> ReadAsync(int id);
+        Task<List<T>> ReadAllAsync();
+        Task UpdateAsync(T item);
+        Task DeleteAsync (int id);
     }
 }

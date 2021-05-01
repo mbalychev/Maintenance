@@ -4,6 +4,7 @@ using System.Text;
 using Maintenance.Entities;
 using Microsoft.EntityFrameworkCore;
 using Maintenance.Models.Employee;
+using Maintenance.Models;
 
 namespace Data.Entities
 {
@@ -24,7 +25,7 @@ namespace Data.Entities
         public DbSet<ServiceType> ServiceTypes { get; set; }
         public DbSet<MaintenancePlan> MaintenancePlans { get; set; }
         public DbSet<Software> Softwares { get; set; }
-
+        public DbSet<WorkerMaintenans> WorkerMaintenans { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -113,7 +114,6 @@ namespace Data.Entities
                     new MaintenancePlan { Id = 14, HardWareId = 2, ServiceDate = Convert.ToDateTime("03.04.2020"), ServiceTypeId = 6, Comment = "перегружается постоянно"},
                     new MaintenancePlan { Id = 15, HardWareId = 4, ServiceDate = Convert.ToDateTime("07.06.2020"), ServiceTypeId = 6, Comment = "не запускаються программы"},
                 });
-
             modelBuilder.Entity<WorkerMaintenans>().HasData(new WorkerMaintenans[]
                 {
                     new WorkerMaintenans { Id = 1, MaintenancePlanId = 1, WorkerId = 1},
@@ -141,5 +141,9 @@ namespace Data.Entities
                     new WorkerMaintenans { Id = 23, MaintenancePlanId = 15, WorkerId = 2}
                 });
         }
+
+        //public DbSet<Maintenance.Models.HardWareModel> HardWareModel { get; set; }
+
+        //public DbSet<Maintenance.Models.Employee.EngineerModel> EngineerModel { get; set; }
     }
 }

@@ -13,6 +13,7 @@ using Maintenance.Controllers;
 using Data.Entities;
 using Maintenance.Repositories;
 using Microsoft.AspNetCore.Http;
+using Maintenance.Models;
 
 namespace Maintenance
 {
@@ -30,6 +31,7 @@ namespace Maintenance
             Configuration.Bind("Project", new Config());
             services.AddDbContext<Context>();
             services.AddTransient<IServices<EngineerModel>, EngineerService>();
+            services.AddTransient<IHardWaresService, HardWareService>();
             services.AddControllersWithViews();
         }
 
@@ -39,6 +41,7 @@ namespace Maintenance
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseStatusCodePages();
             }
             else
             {
@@ -56,7 +59,6 @@ namespace Maintenance
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-
         }
     }
 }

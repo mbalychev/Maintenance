@@ -17,7 +17,8 @@ namespace Maintenance.Entities
         [Display(Name = "№ серийный")]
         public string SerialNumber { get; set; }
         public int? ManufacturerId { get; set; }
-        public Manufacturer Manufacturer { get; set; }
+
+        public Manufacturer Manufacturer {get;set;}
         [DataType(DataType.Date)]
         [Display(Name = "Дата установки")]
 

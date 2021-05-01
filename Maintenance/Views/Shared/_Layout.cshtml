@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" >
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@Config.CompanyName</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -19,13 +19,14 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Engineers" asp-action="Index">Сотрудники</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Engineers" asp-action="Index">Engineers</a>
+                        <li class="nav-item"> 
+                            <a class="text-dark nav-link" asp-controller="HardWares" asp-action="Index">Оборудование</a>
                         </li>
                     </ul>
                 </div>
+                <a class="navbar-nav, btn, btn-outline-secondary" asp-action="About" asp-controller="Home">О проекте</a>
             </div>
         </nav>
     </header>
@@ -35,10 +36,11 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
+    <footer class="border-top footer text-muted text-center" style="line-height: 0.9em;">
+        <p style="margin: 15px;">
             <b>@Config.CompanyName</b> 2021г.
-        </div>
+            </br> демонстрационное приложение
+        </p>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Maintenance.Repositories;
 using Maintenance.Models.Employee;
+using Maintenance.Models;
 
 namespace Maintenance.Controllers
 {
@@ -17,10 +18,12 @@ namespace Maintenance.Controllers
             engineers = service;
         }
         // GET: WorkwersController
-        public ActionResult Index(SortState sortOrder = SortState.NameAsc)
+        public async Task<ActionResult> Index(SortState sortOrder)
         {
             ViewBag.NameSort = sortOrder == SortState.NameDesc ? SortState.NameAsc : SortState.NameDesc;
-            List<EngineerModel> result = engineers.ReadAll();
+            ViewBag.MainSort = sortOrder == SortState.MaintenanceDesc ? SortState.MaintenanceAsc : SortState.MaintenanceDesc;
+
+            List<EngineerModel> result = await engineers.ReadAllAsync();
 
             switch (sortOrder)
             {
@@ -30,6 +33,12 @@ namespace Maintenance.Controllers
                 case SortState.NameDesc:
                     result = result.OrderByDescending(s => s.FullName).ToList();
                     break;
+                case SortState.MaintenanceAsc:
+                    result = result.OrderBy(s => s.CountMaintenance).ToList();
+                    break;
+                case SortState.MaintenanceDesc:
+                    result = result.OrderByDescending(s => s.CountMaintenance).ToList();
+                    break;
                 default:
                     break;
             }
@@ -38,9 +47,17 @@ namespace Maintenance.Controllers
         }
 
         // GET: WorkwersController/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            EngineerModel result = engineers.Read(id);
+            EngineerModel result = null;
+            try
+            {
+                result = await engineers.ReadAsync(id);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new { message = ex.Message });
+            }
             return View(result);
         }
 
@@ -53,17 +70,18 @@ namespace Maintenance.Controllers
         // POST: WorkwersController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(EngineerModel model)
+        public async Task<ActionResult> Create(EngineerModel model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    engineers.Create(model);
+                    await engineers.CreateAsync(model);
                     return RedirectToAction(nameof(Index));
                 }
-                catch
+                catch (Exception ex)
                 {
+                    ModelState.AddModelError("", ex.Message);
                     return View();
                 }
             }
@@ -73,52 +91,68 @@ namespace Maintenance.Controllers
         }
 
         // GET: WorkwersController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            EngineerModel model = engineers.Read(id);
+            EngineerModel model = null;
+            try
+            {
+                model = await engineers.ReadAsync(id);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new { message = ex.Message }, "");
+            }
             return View(model);
         }
 
         // POST: WorkwersController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(EngineerModel model)
+        public async Task<ActionResult> Edit(EngineerModel model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    engineers.Update(model);
+                    await engineers.UpdateAsync(model);
                     return RedirectToAction(nameof(Index));
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    return RedirectToAction("Error", "Home", new { message = e.Message },"");
-                    //ModelState.AddModelError ("",e.Message);
-                    //return View();
+                    ModelState.AddModelError("", ex.Message);
                 }
             }
             return View();
         }
 
         // GET: WorkwersController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            EngineerModel model;
+            try
+            {
+                model = await engineers.ReadAsync(id);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", ex.Message);
+            }
+            return View(model);
         }
 
         // POST: WorkwersController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(EngineerModel model)
         {
             try
             {
+                await engineers.DeleteAsync(model.Id);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return RedirectToAction("Error", "Home", new { message = ex.Message });
             }
         }
     }

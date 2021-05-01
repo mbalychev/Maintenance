@@ -8,6 +8,9 @@ namespace Maintenance.Models.Employee
     public enum SortState
     {
         NameAsc,
-        NameDesc
+        NameDesc,
+        MaintenanceAsc,
+        MaintenanceDesc
+
     }
 }

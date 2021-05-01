@@ -1,0 +1,51 @@
+﻿@model IEnumerable<HardWareModel>
+
+    <h3>
+        Оборудование
+    </h3>
+    <p class="text-muted">
+        Оборудование, обсуживаемое сотрудниками сервисного центра.
+    </p>
+
+    <p>
+        <a asp-action="Create">Добавить</a>
+    </p>
+<form method="get" class="form-inline">
+    <div class="form-group">
+        <label>Тип</label>
+        <select name="type" asp-items="@ViewBag.Types" class="form-control"></select>
+    </div>
+    <input type="submit" value="Применить" class="btn btn-light"/>
+</form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SerialNumber)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Details" asp-route-Id="@item.Id">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SerialNumber)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
