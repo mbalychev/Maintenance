@@ -13,7 +13,7 @@ namespace Maintenance.Models
     {
         [Display (Name =  "Ф.И.О.")]
         public string FullName => FirstName + " " + LastName;
-        [Display(Name = "участник")]
+        [Display(Name = "Кол-во проведенных ТО")]
         public int CountMaintenance { get; set; }
         public List<MaintenancePlanModel> MaintenancePlans { get; set; }
         public EngineerModel()

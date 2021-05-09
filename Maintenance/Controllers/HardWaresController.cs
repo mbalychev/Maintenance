@@ -64,5 +64,10 @@ namespace Maintenance.Controllers
                     return RedirectToAction("Home", "Error", new { message = "не определен тип модели" });
             }
         }
+
+        public IActionResult Create()
+        {
+            return RedirectToAction("Error", "Home", new { message = "не поддерживается в демо версии" });
+        }
     }
 }

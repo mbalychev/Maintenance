@@ -10,54 +10,71 @@
 </head>
 <body>
 
-<div>
-    <h4>Инженер</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BirthDay)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BirthDay)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Education)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Education)
-        </dd>
-        <dt class="col-sm-2">
-            Участвовал в работах:
-        </dt>
-        <dd class="col-sm-10">
-            <ul>
+    <div class="row">
+        <div class="col-md-1">
+            <img src="~/Icons/icons8-man-window-50.png" style="height: 60px;" />
+        </div>
+        <div class="col-md-11">
+            <div class="row">
+                <div class="col-md-2">
+                    <h4>
+                        Инженер
+                    </h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <a asp-action="Index">Список</a>
+                    |
+                    <a asp-action="Edit" asp-route-id="@Model.Id">Изменить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <hr style="background-color: #127d87; height:2px;"/>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.BirthDay)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.BirthDay)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Education)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Education)
+            </dd>
+            <dt class="col-sm-2">
+                Участвовал в работах:
+            </dt>
+            <dd class="col-sm-10">
                 @foreach (MaintenancePlanModel mainPlan in Model.MaintenancePlans)
                 {
-                <li>
+
                     <a asp-action="Details" asp-controller="MaintenancesPlan" asp-route-id="@mainPlan.Id">
-                        @Html.DisplayFor(model => mainPlan.ServiceType.Name) @Html.DisplayFor(model => mainPlan.ServiceDate)
+                        <img src="~/Icons/icons8-обслуживание-50.png" style="height: 30px;" />
+                        @Html.DisplayFor(model => mainPlan.ServiceType.Name)
+                        от @Html.DisplayFor(model => mainPlan.ServiceDate)
                     </a>
-                </li>
+                    <br />
                 }
-            </ul>
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Изменить</a> |
-    <a asp-action="Index">Список</a>
-</div>
+            </dd>
+        </dl>
+    </div>
 </body>
 </html>

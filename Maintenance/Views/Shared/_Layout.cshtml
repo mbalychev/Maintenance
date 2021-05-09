@@ -9,9 +9,10 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" >
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: #d7f3f7;">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@Config.CompanyName</a>
+                
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Icons/icons8-закладка-лента-50.png" />@Config.CompanyName</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -19,14 +20,23 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Engineers" asp-action="Index">Сотрудники</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Engineers" asp-action="Index">
+                                <img src="~/Icons/icons8-человек-с-ключом-50.png" />Сотрудники
+                            </a>
                         </li>
-                        <li class="nav-item"> 
-                            <a class="text-dark nav-link" asp-controller="HardWares" asp-action="Index">Оборудование</a>
+                        <li class="nav-item">
+                            <a class="text-dark nav-link" asp-controller="HardWares" asp-action="Index">
+                                <img src="~/Icons/icons8-рабочая-станция-50.png" />Оборудование
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="About" asp-controller="Home">
+                                <img src="~/Icons/icons8-информация-50.png" />
+                                О сайте
+                            </a>
                         </li>
                     </ul>
                 </div>
-                <a class="navbar-nav, btn, btn-outline-secondary" asp-action="About" asp-controller="Home">О проекте</a>
             </div>
         </nav>
     </header>
