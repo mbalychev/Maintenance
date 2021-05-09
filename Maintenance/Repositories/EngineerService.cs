@@ -42,7 +42,21 @@ namespace Maintenance.Repositories
             try
             {
                 Engineer engineer = await db.Engineers.FindAsync(id);
-                model = new EngineerModel(engineer);
+                int countMaintenance = await db.WorkerMaintenans.Where(x => x.WorkerId == engineer.Id).CountAsync();
+                model = new EngineerModel(engineer, countMaintenance);
+                
+                model.MaintenancePlans = new List<MaintenancePlanModel>();
+                int[] plansIds =  await db.WorkerMaintenans.Where(x => x.WorkerId == id).Select(x=>x.MaintenancePlanId).ToArrayAsync();
+                for (int i =0; i < plansIds.Length; i++)
+                {
+                    MaintenancePlan plan = await db.MaintenancePlans.Where(x => x.Id == plansIds[i]).FirstOrDefaultAsync();
+                    if (plan != null)
+                    {
+                        ServiceType serviceType = await db.ServiceTypes.FindAsync(plan.ServiceTypeId);
+                        MaintenancePlanModel maintenancePlanModel = new MaintenancePlanModel(plan, serviceType, null);
+                        model.MaintenancePlans.Add(maintenancePlanModel);
+                    }
+                }
             }
             catch (Exception)
             {
@@ -102,8 +116,13 @@ namespace Maintenance.Repositories
             List<EngineerModel> models = new List<EngineerModel>();
             try
             {
+                int countMaintenance = 0;
                 foreach (Engineer engineer in engineers)
-                    models.Add(new EngineerModel(engineer));
+                {
+                    countMaintenance = db.WorkerMaintenans.Where(x => x.WorkerId == engineer.Id).Count();
+                    models.Add(new EngineerModel(engineer, countMaintenance));
+
+                }
             }
             catch (Exception ex)
             {

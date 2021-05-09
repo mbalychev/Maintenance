@@ -109,6 +109,7 @@ namespace Data.Entities
                     new MaintenancePlan { Id = 8, HardWareId = 17, ServiceDate = Convert.ToDateTime("02.07.2020"), ServiceTypeId = 3, Comment = "ремонт кнопки питания"},
                     new MaintenancePlan { Id = 9, HardWareId = 19, ServiceDate = Convert.ToDateTime("01.07.2020"), ServiceTypeId = 3, Comment = "замена ламп"},
                     new MaintenancePlan { Id = 10, HardWareId = 19, ServiceDate = Convert.ToDateTime("11.02.2020"), ServiceTypeId = 3, Comment = "замена блока питания"},
+                    new MaintenancePlan { Id = 11, HardWareId = 4, ServiceDate = Convert.ToDateTime("11.02.2020"), ServiceTypeId = 3, Comment = "замена блока питания"},
                     new MaintenancePlan { Id = 12, HardWareId = 19, ServiceDate = Convert.ToDateTime("12.02.2020"), ServiceTypeId = 3, Comment = "ремонт кнопки питания"},
                     new MaintenancePlan { Id = 13, HardWareId = 5, ServiceDate = Convert.ToDateTime("18.08.2020"), ServiceTypeId = 6, Comment = "зависает при включении"},
                     new MaintenancePlan { Id = 14, HardWareId = 2, ServiceDate = Convert.ToDateTime("03.04.2020"), ServiceTypeId = 6, Comment = "перегружается постоянно"},

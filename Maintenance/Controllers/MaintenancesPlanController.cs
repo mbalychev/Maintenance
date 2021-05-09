@@ -26,7 +26,6 @@ namespace Maintenance.Controllers
         // GET: MaintenancesPlan/Details/5
         public async Task<ActionResult> Details(int id)
         {
-
             if (id != 0)
             {
                 MaintenancePlanModel model = await plans.ReadAsync(id);

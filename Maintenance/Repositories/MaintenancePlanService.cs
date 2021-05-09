@@ -58,17 +58,19 @@ namespace Maintenance.Repositories
 
             ServiceType serviceType;
             List<WorkerMaintenans> workerMaintenans;
-            EngineerModel engineer;
+            Engineer engineer;
             List<EngineerModel> engineers = new List<EngineerModel>();
             MaintenancePlanModel model;
+            int countMaintenance = 0;
             try
             {
                 serviceType = await db.ServiceTypes.Where(x => x.Id == maintenancePlan.ServiceTypeId).FirstOrDefaultAsync();
                 workerMaintenans = await db.WorkerMaintenans.Where(x => x.MaintenancePlanId == maintenancePlan.Id).ToListAsync();
                 foreach (WorkerMaintenans worker in workerMaintenans)
                 {
-                    engineer = new EngineerModel(await db.Engineers.FirstOrDefaultAsync(x => x.Id == worker.WorkerId));
-                    engineers.Add(new EngineerModel(engineer));
+                    engineer = await db.Engineers.FirstOrDefaultAsync(x => x.Id == worker.WorkerId);
+                    countMaintenance = await db.WorkerMaintenans.Where(x => x.WorkerId == engineer.Id).CountAsync();
+                    engineers.Add(new EngineerModel(engineer, countMaintenance));
                 }
                 model = new MaintenancePlanModel(maintenancePlan, serviceType, engineers);
             }

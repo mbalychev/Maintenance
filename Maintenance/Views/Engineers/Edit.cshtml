@@ -1,22 +1,13 @@
 ﻿@model EngineerModel
 
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Изменить сведения</title>
-</head>
-<body>
-
 <h4>Инженер</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Id" name="Id"/>
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
                 <input asp-for="FirstName" class="form-control" />
@@ -29,12 +20,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="BirthDay" class="control-label"></label>
-                <input asp-for="BirthDay" class="form-control" />
+                <input asp-for="BirthDay" class="form-control"/>
                 <span asp-validation-for="BirthDay" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Education" class="control-label"></label>
-                <input asp-for="Education" class="form-control" />
+                <input asp-for="Education" class="form-control"/>
                 <span asp-validation-for="Education" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -51,5 +42,4 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-</body>
-</html>
+
