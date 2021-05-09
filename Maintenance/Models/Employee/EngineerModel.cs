@@ -11,9 +11,25 @@ namespace Maintenance.Models
 {
     public class EngineerModel : Engineer
     {
+        public EngineerModel(Engineer engineer)
+        {
+            if (engineer  != null)
+            {
+                this.Id = engineer.Id;
+                this.FirstName = engineer.FirstName;
+                this.LastName = engineer.LastName;
+                this.BirthDay = engineer.BirthDay;
+                this.Education = engineer.Education;
+            }
+        }
+
         [Display (Name =  "Ф.И.О.")]
         public string FullName => FirstName + " " + LastName;
         [Display(Name = "участник")]
         public int CountMaintenance { get; set; }
+        //public EngineerModel(Engineer)
+        //{
+            
+        //}
     }
 }

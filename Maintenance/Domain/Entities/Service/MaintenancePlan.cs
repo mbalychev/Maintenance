@@ -16,6 +16,7 @@ namespace Maintenance.Entities
         public DateTime ServiceDate { get; set; }
         [Required]
         public int ServiceTypeId { get; set; }
+        
         [Required]
         public int HardWareId { get; set; }
         [Display(Name = "Неисправность/Производимые работы")]

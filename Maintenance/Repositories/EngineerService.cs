@@ -9,6 +9,7 @@ using Maintenance.Models.Employee;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using Maintenance.Models;
+using Maintenance.Services;
 
 namespace Maintenance.Repositories
 {
@@ -25,7 +26,7 @@ namespace Maintenance.Repositories
             {
                 try
                 {
-                    await db.Workers.AddAsync(new Engineer { Id = model.Id, BirthDay = model.BirthDay, Education = model.Education, FirstName = model.FirstName, LastName = model.LastName });
+                    await db.Workers.AddAsync(new Engineer(model));
                     await db.SaveChangesAsync();
                 }
                 catch (Exception ex)
@@ -40,8 +41,8 @@ namespace Maintenance.Repositories
             EngineerModel model = null;
             try
             {
-                Engineer engineer = await db.Workers.FirstOrDefaultAsync(x => x.Id == id) as Engineer;
-                model = new EngineerModel { Id = engineer.Id, BirthDay = engineer.BirthDay, Education = engineer.Education, FirstName = engineer.FirstName, LastName = engineer.LastName, CountMaintenance = db.WorkerMaintenans.Where(x => x.WorkerId == engineer.Id).Count() };
+                Engineer engineer = await db.Engineers.FindAsync(id);
+                model = new EngineerModel(engineer);
             }
             catch (Exception)
             {
@@ -66,7 +67,7 @@ namespace Maintenance.Repositories
             {
                 try
                 {
-                    Engineer engineer = (new Engineer { Id = model.Id, BirthDay = model.BirthDay, Education = model.Education, FirstName = model.FirstName, LastName = model.LastName });
+                    Engineer engineer = (new Engineer(model));
                     db.Workers.Update(engineer);
                 }
                 catch (Exception ex)
@@ -79,23 +80,16 @@ namespace Maintenance.Repositories
 
         public async Task DeleteAsync(int id)
         {
-            Worker worker = await db.Workers.FirstOrDefaultAsync(x=>x.Id == id);
-            if (worker != null)
-            {
                 try
                 {
+                    Worker worker = await db.Workers.FindAsync(id);
                     db.Workers.Remove(worker);
                     await db.SaveChangesAsync();
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception(String.Format("ошибка при удалении модели id - {0}: {1}", worker.Id, ex.Message));
+                    throw new Exception(String.Format("ошибка при удалении модели: " + ex.Message));
                 }
-            }
-            else
-            {
-                throw new Exception(String.Format("ошибка при удалении модели id - {0}", worker.Id));
-            }
         }
     
         public void Dispose()
@@ -109,13 +103,18 @@ namespace Maintenance.Repositories
             try
             {
                 foreach (Engineer engineer in engineers)
-                    models.Add(new EngineerModel { Id = engineer.Id, BirthDay = engineer.BirthDay, Education = engineer.Education, FirstName = engineer.FirstName, LastName = engineer.LastName, CountMaintenance = db.WorkerMaintenans.Where(x => x.WorkerId == engineer.Id).Count() });
+                    models.Add(new EngineerModel(engineer));
             }
             catch (Exception ex)
             {
                 throw new Exception("ошибка при чтении списка сотрудников - " + ex.Message);
             }
             return models;
+        }
+
+        public Task<List<EngineerModel>> ReadAllAsync(int id)
+        {
+            throw new NotSupportedException("не используется тетод с параметром");
         }
     }
 }

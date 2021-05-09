@@ -14,6 +14,11 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\FiscalRegistrator\" />
+    <Folder Include="Models\Computer\" />
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

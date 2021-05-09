@@ -1,4 +1,4 @@
-using Maintenance.Service;
+using Maintenance.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +14,7 @@ using Data.Entities;
 using Maintenance.Repositories;
 using Microsoft.AspNetCore.Http;
 using Maintenance.Models;
+using Maintenance.Services;
 
 namespace Maintenance
 {
@@ -31,7 +32,11 @@ namespace Maintenance
             Configuration.Bind("Project", new Config());
             services.AddDbContext<Context>();
             services.AddTransient<IServices<EngineerModel>, EngineerService>();
-            services.AddTransient<IHardWaresService, HardWareService>();
+            services.AddTransient<IHardWaresService<HardWareModel>, HardWareService>();
+            services.AddTransient<IServices<MonitorModel>, MonitorService>();
+            services.AddTransient<IServices<FiscalRegistratorModel>, FiscalRegistratorService>();
+            services.AddTransient<IServices<ComputerModel>, ComputerService>();
+            services.AddTransient<IServices<MaintenancePlanModel>, MaintenancePlanService>();
             services.AddControllersWithViews();
         }
 

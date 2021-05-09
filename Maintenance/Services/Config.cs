@@ -1,4 +1,4 @@
-﻿namespace Maintenance.Service
+﻿namespace Maintenance.Services
 {
     public class Config
     {
