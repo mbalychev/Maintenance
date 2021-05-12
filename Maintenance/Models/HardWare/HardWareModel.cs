@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Maintenance.Entities;
@@ -12,8 +13,10 @@ namespace Maintenance.Models
         public Manufacturer Manufacturer { get; set; }
         public static List<TypeHardWare> TypesRead => GetTypes();
         public string TypeModel { get => typeModel; }
+        [Display(Name = "Кол-во ремонтов")]
         public int MaintenancePlansCount { get; set; }
-
+        public List<MaintenancePlanModel> MaintenancesPlanModel { get;}
+        [Display(Name = "Описание")]
         public string Description { get {
                 switch (typeModel)
                 {

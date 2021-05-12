@@ -1,15 +1,30 @@
 ﻿@model FiscalRegistratorModel
 
-@{
-    ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
-<h1>Details</h1>
+<div class="row">
+    <div class="col-md-1">
+        <img src="~/Icons/icons8-коробка-50.png" style="height: 60px;"/>
+    </div>
+    <div class="col-md-11">
+        <div class="row">
+            <div class="col-md-11">
+                <h4>
+                    Фискальный регистратор
+                </h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-11">
+                <a asp-action="Index" asp-controller="HardWares">Список</a>
+                |
+                <a asp-action="Edit" asp-route-id="@Model.Id">Изменить</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div>
-    <h4>FiscalRegistrator</h4>
-    <hr />
+    <hr style="background-color: #127d87; height:2px;" />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Release)
@@ -53,10 +68,18 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.SealNumber)
         </dd>
+        <dt class="col-sm-2">
+            Ремонты
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var item in Model.MaintenancesPlanModel)
+            {
+                <p>
+                    @item.ServiceType.Name от @item.ServiceDate.ToShortDateString()
+                </p>
+            }
+        </dd>
 
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+

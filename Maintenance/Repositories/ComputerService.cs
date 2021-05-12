@@ -47,7 +47,8 @@ namespace Maintenance.Repositories
             try
             {
                 Computer computer = await db.Computers.Include(x=>x.Manufacturer).Include(x=>x.Software).FirstOrDefaultAsync(x=>x.Id == id);
-                ComputerModel model = new ComputerModel(computer);
+                List<MaintenancePlanModel> planModels = await new MaintenancePlanService(db).ReadMaintenancesPlanAsync(id);
+                ComputerModel model = new ComputerModel(computer, planModels);
                 return model;
             }
             catch(Exception ex)

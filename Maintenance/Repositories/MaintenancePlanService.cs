@@ -105,5 +105,19 @@ namespace Maintenance.Repositories
         {
             throw new NotSupportedException("необходимо использовать метод с параметром");
         }
+
+        public async Task<List<MaintenancePlanModel>> ReadMaintenancesPlanAsync(int idHardWare)
+        {
+            List<MaintenancePlan> maintenances = await db.MaintenancePlans.Where(x => x.HardWareId == idHardWare).ToListAsync();
+            List<MaintenancePlanModel> maintenancesModels = new List<MaintenancePlanModel>();
+            ServiceType serviceType;
+
+            foreach (MaintenancePlan maintenance in maintenances)
+            {
+                serviceType = await db.ServiceTypes.Where(x => x.Id == maintenance.ServiceTypeId).FirstOrDefaultAsync();
+                maintenancesModels.Add(new MaintenancePlanModel(maintenance, serviceType, null));
+            }
+            return maintenancesModels;
+        }
     }
 }

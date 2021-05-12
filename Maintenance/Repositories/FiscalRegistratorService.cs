@@ -48,7 +48,8 @@ namespace Maintenance.Repositories
             try
             {
                 FiscalRegistrator registrator = await db.FiscalRegistrators.Include(x => x.Manufacturer).FirstOrDefaultAsync(x => x.Id == id);
-                FiscalRegistratorModel model = new FiscalRegistratorModel(registrator);
+                List<MaintenancePlanModel> planModels = await new MaintenancePlanService(db).ReadMaintenancesPlanAsync(id);
+                FiscalRegistratorModel model = new FiscalRegistratorModel(registrator, planModels);
                 return model;
             }
             catch (Exception)

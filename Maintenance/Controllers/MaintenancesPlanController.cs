@@ -37,28 +37,29 @@ namespace Maintenance.Controllers
         // GET: MaintenancesPlan/Create
         public ActionResult Create()
         {
-            return View();
+            return RedirectToAction("Error", "Home", new { message = "не поддерживаеться в демо версии"});
         }
 
         // POST: MaintenancesPlan/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(MaintenancePlanModel model)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                await plans.CreateAsync(model);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return RedirectToAction("Error", "Home", new { message = ex.Message });
             }
+            return View();
         }
 
         // GET: MaintenancesPlan/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return RedirectToAction("Error", "Home", new { message = "не поддерживаеться в демо версии" });
         }
 
         // POST: MaintenancesPlan/Edit/5
@@ -79,7 +80,7 @@ namespace Maintenance.Controllers
         // GET: MaintenancesPlan/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return RedirectToAction("Error", "Home", new { message = "не поддерживаеться в демо версии" });
         }
 
         // POST: MaintenancesPlan/Delete/5

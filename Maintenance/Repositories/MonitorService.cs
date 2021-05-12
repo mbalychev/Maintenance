@@ -44,7 +44,8 @@ namespace Maintenance.Repositories
             try
             {
                 Monitor monitor = await db.Monitors.FindAsync(id);
-                MonitorModel model = new MonitorModel(monitor);
+                List<MaintenancePlanModel> planModels = await new MaintenancePlanService(db).ReadMaintenancesPlanAsync(id);
+                MonitorModel model = new MonitorModel(monitor, planModels);
                 return model;
             }
             catch (Exception ex)

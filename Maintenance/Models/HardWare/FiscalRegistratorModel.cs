@@ -11,6 +11,8 @@ namespace Maintenance.Models
 {
     public class FiscalRegistratorModel : FiscalRegistrator
     {
+        public List<MaintenancePlanModel> MaintenancesPlanModel { get; }
+
         public FiscalRegistratorModel(FiscalRegistrator fiscalRegistrator)
         {
             this.Id = fiscalRegistrator.Id;
@@ -22,6 +24,20 @@ namespace Maintenance.Models
             this.SealNumber = fiscalRegistrator.SealNumber;
             this.SealYear = fiscalRegistrator.SealYear;
             this.Release = fiscalRegistrator.Release;
+        }
+
+        public FiscalRegistratorModel(FiscalRegistrator fiscalRegistrator, List<MaintenancePlanModel> maintenances)
+        {
+            this.Id = fiscalRegistrator.Id;
+            this.InstallationDate = fiscalRegistrator.InstallationDate;
+            this.ManufacturerId = fiscalRegistrator.ManufacturerId;
+            this.Manufacturer = fiscalRegistrator.Manufacturer;
+            this.Name = fiscalRegistrator.Name;
+            this.SerialNumber = fiscalRegistrator.SerialNumber;
+            this.SealNumber = fiscalRegistrator.SealNumber;
+            this.SealYear = fiscalRegistrator.SealYear;
+            this.Release = fiscalRegistrator.Release;
+            this.MaintenancesPlanModel = maintenances;
         }
     }
 }
