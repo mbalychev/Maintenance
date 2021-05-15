@@ -30,8 +30,8 @@ namespace Data.Entities
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ServiceCentr;Trusted_Connection=true;");
+            //optionsBuilder.UseSqlServer("Server=localhost;Database=ServiceCentr;User ID=;Password=;");
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //base.OnModelCreating(modelBuilder);
