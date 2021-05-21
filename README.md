@@ -1,12 +1,7 @@
 # Сервисный центр (Maintenance)
 Создан как демонстрационный проект. Представляет собой веб-приложение для организации по ремонту и обслуживанию техники своими силами.
 
-Технологии
-C#
-ASP.Net Core MVC
-pattern MVC
-Entity Framework Core
-LINQ
+Технологии: C#, ASP.Net Core MVC, pattern MVC, Entity Framework Core, LINQ
 
 Основные функции:
 Учет иженеров компании.
